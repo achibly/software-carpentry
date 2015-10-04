@@ -1,0 +1,54 @@
+---
+title: "Untitled"
+author: "Alex Chibly"
+date: "October 4, 2015"
+output: html_document
+---
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+summary(cars)
+```
+
+You can also embed plots, for example:
+
+```{r, echo=TRUE}
+plot(cars)
+
+
+
+data1 <- read.table(file = "~/software-carpentry/output/combined_gapMinder.tsv", header=TRUE)
+
+
+newdata <- subset(data1, data1$country=="China")
+x=newdata$year
+y=newdata$gdpPercap
+plot(x,y, main = "GDP by year in China", ylab = "Population", xlab = "GDP")
+
+newdata2 <- subset(data1, data1$country=="Austria")
+x=newdata2$year
+y=newdata2$gdpPercap
+plot(x,y, main = "GDP by year in Austria", ylab = "Population", xlab = "GDP")
+
+newdata3 <- subset(data1, data1$country=="Mexico")
+x=newdata3$year
+y=newdata3$gdpPercap
+plot(x,y, main = "GDP by year in Mexico", ylab = "Population", xlab = "GDP")
+
+for (i in unique(data1$country)){ 
+  sub <- subset(data1 , data1$country==i) 
+  x = sub$year
+  y = sub$gdpPercap
+  plot(x, y, main=paste("GDP by year in ",i), xlab = "year", ylab = "GDP")
+  abline(lm(y~x))
+}
+
+
+
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
